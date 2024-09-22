@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+	<link rel="stylesheet" href="./css/main.css">
+	
+	 <script src="https://cdn.tailwindcss.com"></script>
+	                     
+<style>
+		
+        /* General table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        /* Table header styling */
+        th {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 15px;
+        }
+
+        /* Table data cell styling */
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid;
+            font-size:15px;
+        }
+
+        /* Table row hover effect */
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        /* Alternate row color for better readability */
+
+
+        /* Table container styling */
+        .table-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+            }
+            button{
+            padding:10px;
+            font-size:15px;
+            }
+            input{
+            padding:5px;
+            font-size:15px;
+            border:none;
+            }
+            </style>
+</head>
+	 
+   
+<body> 
+    <div class="w-full h-screen">
+     <div class="hidden username"  th:text="${username}"></div>
+     <div class="hidden fullname" th:text="${fullname}"></div>
+        <div class="flex h-full relative ">
+        
+        <div th:if="${success}" class="success absolute start-1/4 opacity-100 top-10 m-auto bg-green-400 w-1/2 text-white p-4 rounded-xl">
+        	<p th:text="${success}" ></p>
+        </div>
+        
+        <div th:if="${failed}" class="failed absolute start-1/4 opacity-100 top-10 m-auto bg-red-400 w-1/2 text-white p-4 rounded-xl">
+        	<p th:text="${failed}"></p>
+        </div>
+            <div class="h-screen "  th:insert="nav.html"></div>
+           
+            <div id="change-profile"  class="absolute hidden   z-50 rounded-xl shadow-3xl flex flex-col items-center justify-center  bg-gray-300 p-3 top-44 left-10" > </div>
+				     
+	   
+                    
+            
+            <div class="flex-auto bg-gray-100 w-full h-full main-body">
+                <div class="main-body container m-auto w-11/12 h-full flex flex-col">
+			
+				 <table border="2px">
+					<tr bgcolor="skyblue">
+					 	<th>Id</th>
+					 	<th>Username</th>
+					 	<th>Last Name</th>
+					 	<th>User Name</th>
+					 	<th>Action</th>
+					 	
+				 	</tr>
+				 	
+				 	
+				 	
+				 	<tr th:each="user : ${listEmployees}">
+				 	
+				 		<td>Id</td>
+				 		<td th:text="${user.getUserName()}"></td>
+						<td th:text="${user.getFullName()}"></td>
+						<td th:text="${user.getEmail()}"></td>
+				 		<td>
+				 		<form action="/deleteUser" method="post">
+				 		<input type="hidden" th:value="${user.getId()}" name="id">
+				 		<button type="submit" class="rounded-xl p-3" style=" background-color:red;color:white">Delete</button>
+				 		</form>
+				 		</td>
+				  	
+				 	</tr>
+			 	 	
+			
+			 	 	
+			 </table>
+			 
+			 <div th:if = "${totalPages > 1}">
+			<div class = "flex flex-col items-center gap-4">
+				<div class = "col-sm-2">
+					Total Rows: [[${totalItems}]] 
+				</div>
+				<div class = "flex text-center">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+				</div>
+				<div class = "text-center inline">
+					<a th:if="${currentPage < totalPages}" class="bg-black rounded-xl text-white px-3 py-2" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<span th:unless="${currentPage < totalPages}" class="text-gray-500">Next</span>
+				</div>
+				
+				<div class = "text-center inline">
+					<a th:if="${currentPage >1}" class="bg-black rounded-xl text-white px-3 py-2" th:href="@{'/page/' + ${currentPage-1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
+					<span th:unless="${currentPage > 1}" class="text-gray-500">Previous</span>
+				</div>
+				
+				 <div class="col-sm-1">
+    				<a th:if="${currentPage < totalPages}" class="bg-black rounded-xl text-white px-3 py-2" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span th:unless="${currentPage < totalPages}" class="text-gray-500">Last</span>
+   				 </div>
+			</div>
+		</div>
+			 
+
+            </div>
+            <div class="" th:replace="~{settings::settings}"></div>
+        </div>
+    </div>
+    </div>

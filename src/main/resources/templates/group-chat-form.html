@@ -1,0 +1,43 @@
+
+ <div id="username-page" class="hidden p-5 w-max-7xl w-full shadow-lg rounded-2xl bg-white ">
+						    <div class="p-10  flex flex-col justify-center text-white">
+						        <h1 class="title py-5 text-2xl text-black">Type your username to enter the Chatroom</h1>
+						        <form id="usernameForm"  name="usernameForm">
+						            <div class="form-group">
+						                <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control rounded-xl px-5 py-2 text-black" />
+						            </div>
+						            <div class="form-group">
+						                <button type="submit" class="accent username-submit px-3 py-2 rounded-xl">Start Chatting</button>
+						            </div>
+						        </form>
+						    </div>
+</div>
+
+<div id="group-chat-page" class="hidden w-full rounded-2xl shadow-lg bg-white">
+						    <div class="h-96 flex flex-col items-center p-5 gap-5">
+						        <div class="text-2xl">
+						            <h2>Group Chat</h2>
+						        </div>
+						        <div class="connecting">
+						            Connecting...
+						        </div>
+						        <ul id="messageArea" class="w-full flex flex-col gap-5">
+						
+						        </ul>
+						        <form id="messageform" name="messageForm" class="w-full">
+						            <div class="form-group w-full">
+						                <div class="input-group clearfix flex w-full">
+						                    <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off" class="form-control px-5 py-2 rounded w-3/4 flex-auto"/>
+						                    <button type="submit" class="primary flex-1 p-2 rounded">Send</button>
+						                </div>
+						            </div>
+						        </form>
+						    </div>
+</div>
+
+<div class="absolute hidden cross-button z-10 top-0 left-3">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+
+</div>

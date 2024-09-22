@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main1.css">
+    <title>Chat Application</title>
+</head>
+<body>
+
+<h2>One to One Chat </h2>
+<script type="module" src="/js/IChat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<div></div>
+<h1 th:text="${username}"></h1>
+<h1 th:text="${fullname}"></h1>
+<div th:fragment="users-list" class="chat-container hidden rounded-xl " id="chat-page">
+    <div  class="users-list">
+        <div class="users-list-container">
+            <h2 class="text-center">Online Users</h2>
+            <ul id="connectedUsers"><li></li>
+            </ul>
+        </div>
+        <div>
+          
+            
+        </div>
+    </div>
+</div>
+    <div th:fragment="chat-area" class="chat-area p-5 h-screen">
+        <div class="chat-area shadow-2xl rounded-2xl p-5 h-3/4 overflow-auto" id="chat-messages">
+
+        </div>
+
+        <form id="individualmessageForm" name="messageForm" class="hidden w-full">
+            <div class="message-input  flex">
+                <input class="flex-auto w-3/4 rounded p-2" autocomplete="off" type="text" id="message" placeholder="Type your message...">
+                <button class="flex-1 rounded-xl p-2">Send</button>
+            </div>
+        </form>
+    </div>
+
+
+
+
+</body>
+</html>

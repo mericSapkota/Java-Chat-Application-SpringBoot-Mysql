@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+	<link rel="stylesheet" href="./css/main.css">
+	
+	 <script src="https://cdn.tailwindcss.com"></script>
+   
+<body> 
+    <div class="w-full h-screen">
+     <div class="hidden username"  th:text="${username}"></div>
+     <div class="hidden fullname" th:text="${fullname}"></div>
+        <div class="flex h-full relative ">
+        
+        <div th:if="${success}" class="success absolute start-1/4 opacity-100 top-10 m-auto bg-green-400 w-1/2 text-white p-4 rounded-xl">
+        	<p th:text="${success}"></p>
+        </div>
+        <div th:if="${failed}" class="failed absolute start-1/4 opacity-100 top-10 m-auto bg-red-400 w-1/2 text-white p-4 rounded-xl">
+        	<p th:text="${failed}"></p>
+        </div>
+            <div class="h-screen "  th:insert="nav.html"></div>
+           
+            <div id="change-profile"  class="absolute hidden   z-50 rounded-xl shadow-3xl flex flex-col items-center justify-center  bg-gray-300 p-3 top-44 left-10" > </div>
+				     
+	   
+                    
+            
+            <div class="flex-auto bg-gray-100 w-full h-full main-body">
+                <div class="main-body container m-auto w-11/12 h-full flex flex-col">
+                    <div class="py-4 flex-2 flex flex-row">
+                        <div class="flex-1">
+                            <span class="xl:hidden inline-block text-gray-700 hover:text-gray-900 align-bottom">
+                                <span class="block h-6 w-6 p-1 rounded-full hover:bg-gray-400">
+                                    <svg class="w-4 h-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                                </span>
+                            </span>
+                            <span class="lg:hidden inline-block ml-8 text-gray-700 hover:text-gray-900 align-bottom">
+                                <span class="block h-6 w-6 p-1 rounded-full hover:bg-gray-400">
+                                    <svg class="h-4 w-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="flex-1 text-right">
+                            <span class="inline-block text-gray-700">
+                                Status: <span class="inline-block align-text-bottom w-4 h-4 bg-green-400 rounded-full border-2 border-white"></span> <b>Online</b>
+                                <span class="inline-block align-text-bottom">
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-4 h-4"><path d="M19 9l-7 7-7-7"></path></svg>
+                                </span>
+                            </span>
+        
+                            <span class="inline-block ml-8 text-gray-700 hover:text-gray-900 align-bottom">
+                                <span class="block h-6 w-6 p-1 rounded-full hover:bg-gray-400">
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-4 h-4"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+    
+                    <div class="main hi flex-1 flex flex-col">
+                        <div class="hidden lg:block heading flex-2">
+                            <h1 class="text-3xl text-gray-700 mb-4">Chat</h1>
+                        </div>
+
+                        <div class="flex-1 flex h-full">
+                            <div class="sidebar hidden lg:flex w-1/3 flex-2 flex-col pr-6">
+                                <div class="search flex-2 pb-6 px-2">
+                                    <input type="text" class="outline-none py-2 block w-full bg-transparent border-b-2 border-gray-200" placeholder="Search">
+                                </div>
+                                
+                               <button class="group-chat">Secret Group Chat</button>
+                                
+                                <div class="flex-1 h-full overflow-auto px-2">
+                                
+                                <div th:replace="~{index :: users-list}"></div>
+                                
+                               
+                                    
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="flex-auto w-full h-full ">
+                             <div class="w-full absolute top-0 h-full bg-red-300" th:replace="~{index::chat-area}" ></div>
+                            <div th:insert="group-chat-form.html" class="relative">
+                                </div> 
+
+					
+
+                        </div> 
+                            </div>
+                            
+                         
+                    </div>
+             
+                </div>
+            </div>
+            <div class="" th:replace="~{settings::settings}"></div>
+        </div>
+    </div>
+    
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+   <script type="module" src="./js/main.js"></script>
+   <script type="module" th:src="@{/js/IChat.js}"></script>
+   <script type="module" th:src="@{./js/GChat.js}"></script> 
+    <script src="./js/profilechange.js"></script>
+</body>
+</html>
